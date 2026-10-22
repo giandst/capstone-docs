@@ -1,0 +1,174 @@
+{
+  "dataset": "compras-demo-v1.csv",
+  "version": "1.0.0",
+  "creado": "2026-10-06",
+  "nota": "Etiquetas fuera del CSV ingerible, a proposito. Si las etiquetas fueran ingeribles la evaluacion estaria contaminada (demo-dataset.md).",
+  "control_evaluado": {
+    "codigo": "cep-compras-01",
+    "delito": "corrupcion_entre_particulares",
+    "umbral_alerta": 0.5,
+    "umbral_media": 0.4,
+    "umbral_alta": 0.7,
+    "pesos": {
+      "adjudicacion_sin_competencia": 0.35,
+      "proveedor_recientemente_constituido": 0.3,
+      "apellido_compartido_con_solicitante": 0.2,
+      "fraccionamiento": 0.15
+    }
+  },
+  "casos_plantados": [
+    {
+      "caso": "A",
+      "titulo": "Favorecimiento completo: proveedor nuevo, vinculado y fraccionado",
+      "delito": "corrupcion_entre_particulares",
+      "descripcion": "Proveedor constituido 5 dias antes de la primera adjudicacion, razon social que comparte el apellido del solicitante, tres compras consecutivas justo bajo el umbral de aprobacion, todas con un solo oferente.",
+      "filas": [
+        {
+          "id_compra": "PLT-A-0001",
+          "senales_esperadas": [
+            "adjudicacion_sin_competencia",
+            "proveedor_recientemente_constituido",
+            "apellido_compartido_con_solicitante"
+          ],
+          "score_esperado": 0.85,
+          "banda_esperada": "alta",
+          "alerta_esperada": true,
+          "nota": "Primera compra: fraccionamiento aun no dispara, solo hay una compra en la ventana."
+        },
+        {
+          "id_compra": "PLT-A-0002",
+          "senales_esperadas": [
+            "adjudicacion_sin_competencia",
+            "proveedor_recientemente_constituido",
+            "apellido_compartido_con_solicitante"
+          ],
+          "score_esperado": 0.85,
+          "banda_esperada": "alta",
+          "alerta_esperada": true,
+          "nota": "Segunda compra: dos en la ventana, fraccionamiento requiere tres."
+        },
+        {
+          "id_compra": "PLT-A-0003",
+          "senales_esperadas": [
+            "adjudicacion_sin_competencia",
+            "proveedor_recientemente_constituido",
+            "apellido_compartido_con_solicitante",
+            "fraccionamiento"
+          ],
+          "score_esperado": 1.0,
+          "banda_esperada": "alta",
+          "alerta_esperada": true,
+          "nota": "Tercera compra: las cuatro senales del slice disparan. Es el caso central de la demostracion."
+        }
+      ]
+    },
+    {
+      "caso": "B",
+      "titulo": "Solo rastro de motivo: apellido compartido",
+      "delito": "corrupcion_entre_particulares",
+      "descripcion": "Proveedor antiguo y adjudicacion competitiva, pero la razon social comparte el apellido del solicitante.",
+      "filas": [
+        {
+          "id_compra": "PLT-B-0001",
+          "senales_esperadas": ["apellido_compartido_con_solicitante"],
+          "score_esperado": 0.2,
+          "banda_esperada": "baja",
+          "alerta_esperada": false,
+          "nota": "NO LEVANTA ALERTA con la ponderacion actual. Es un falso negativo deliberado: un unico rastro de motivo no alcanza el umbral. Hallazgo reportable sobre calibracion, no un defecto."
+        }
+      ]
+    },
+    {
+      "caso": "C",
+      "titulo": "Rastro directo mas motivo: adjudicacion unica a proveedor nuevo",
+      "delito": "corrupcion_entre_particulares",
+      "descripcion": "Adjudicacion de monto alto con un solo oferente a un proveedor constituido 19 dias antes. Sin vinculo de apellido.",
+      "filas": [
+        {
+          "id_compra": "PLT-C-0001",
+          "senales_esperadas": [
+            "adjudicacion_sin_competencia",
+            "proveedor_recientemente_constituido"
+          ],
+          "score_esperado": 0.65,
+          "banda_esperada": "media",
+          "alerta_esperada": true,
+          "nota": "Supera el umbral de alerta sin alcanzar banda alta. Demuestra que el bucketing es configuracion y no una constante del motor."
+        }
+      ]
+    },
+    {
+      "caso": "D",
+      "titulo": "Solo rastro habilitante: fraccionamiento",
+      "delito": "corrupcion_entre_particulares",
+      "descripcion": "Tres compras al mismo proveedor antiguo, cada una justo bajo el umbral de aprobacion, todas con adjudicacion competitiva.",
+      "filas": [
+        {
+          "id_compra": "PLT-D-0001",
+          "senales_esperadas": [],
+          "score_esperado": 0.0,
+          "banda_esperada": "baja",
+          "alerta_esperada": false,
+          "nota": "Primera de la serie."
+        },
+        {
+          "id_compra": "PLT-D-0002",
+          "senales_esperadas": [],
+          "score_esperado": 0.0,
+          "banda_esperada": "baja",
+          "alerta_esperada": false,
+          "nota": "Segunda de la serie."
+        },
+        {
+          "id_compra": "PLT-D-0003",
+          "senales_esperadas": ["fraccionamiento"],
+          "score_esperado": 0.15,
+          "banda_esperada": "baja",
+          "alerta_esperada": false,
+          "nota": "NO LEVANTA ALERTA. El fraccionamiento es rastro habilitante y pesa 0.15 por derivacion; por si solo no alcanza el umbral. Segundo falso negativo deliberado."
+        }
+      ]
+    },
+    {
+      "caso": "E",
+      "titulo": "Rastro directo mas apellido compartido",
+      "delito": "corrupcion_entre_particulares",
+      "descripcion": "Adjudicacion con un solo oferente a un proveedor antiguo cuya razon social comparte el apellido del solicitante.",
+      "filas": [
+        {
+          "id_compra": "PLT-E-0001",
+          "senales_esperadas": [
+            "adjudicacion_sin_competencia",
+            "apellido_compartido_con_solicitante"
+          ],
+          "score_esperado": 0.55,
+          "banda_esperada": "media",
+          "alerta_esperada": true,
+          "nota": "Supera el umbral por la combinacion de un rastro directo y uno de motivo."
+        }
+      ]
+    }
+  ],
+  "filas_limpias": [
+    "CMP-2026-0001", "CMP-2026-0002", "CMP-2026-0003", "CMP-2026-0004", "CMP-2026-0005",
+    "CMP-2026-0006", "CMP-2026-0007", "CMP-2026-0008", "CMP-2026-0009", "CMP-2026-0010",
+    "CMP-2026-0011", "CMP-2026-0012", "CMP-2026-0013", "CMP-2026-0014", "CMP-2026-0015",
+    "CMP-2026-0016", "CMP-2026-0017", "CMP-2026-0018", "CMP-2026-0019", "CMP-2026-0020",
+    "CMP-2026-0021", "CMP-2026-0022", "CMP-2026-0023", "CMP-2026-0024", "CMP-2026-0025"
+  ],
+  "resumen_esperado": {
+    "filas_totales": 34,
+    "filas_plantadas": 9,
+    "filas_limpias": 25,
+    "alertas_esperadas": 5,
+    "alertas_banda_alta": 3,
+    "alertas_banda_media": 2,
+    "falsos_negativos_deliberados": 3,
+    "falsos_positivos_esperados": 0
+  },
+  "limitacion_declarada": {
+    "riesgo": "evaluacion circular",
+    "detalle": "Este lote fue disenado por la misma persona que escribio las senales, de modo que no mide capacidad de deteccion: solo verifica que el motor ejecuta la definicion declarada. No debe reportarse como precision ni recall.",
+    "contramedida": "evaluation-methodology.md exige un segundo lote derivado solo de la derivacion legal, controles negativos, y un lote ciego de un tercero. Pendiente en la Fase 5."
+  }
+}

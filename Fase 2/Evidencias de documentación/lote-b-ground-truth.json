@@ -1,0 +1,181 @@
+{
+	"lote": "B",
+	"nombre": "Conductas derivadas de la derivacion legal",
+	"dataset": "lote-b-derivacion.csv",
+	"version": "1.0.0",
+	"creado": "2026-10-08",
+	"proposito": "Medir si el sistema detecta las conductas tipicas tal como fueron derivadas de la ley, incluyendo aquellas que por diseno no puede ver. Las omisiones son un hallazgo, no un defecto.",
+	"autoria": {
+		"fuente_de_los_casos": "Conductas tipicas de CP art. 287 bis / 287 ter y Ley 19.913 art. 27, tomadas de derivacion-delitos.md (Fase 1), no del catalogo de senales.",
+		"separacion_lograda": "De fuente: los casos se construyeron recorriendo los elementos tipicos del delito y preguntando que rastro dejaria cada uno, no revisando que senales existen.",
+		"separacion_NO_lograda": "De ignorancia: quien escribio este lote ya conocia el catalogo de senales implementadas. La separacion de autoria es por fuente, no por desconocimiento. Esta limitacion debe declararse en la tesis: este lote NO sustituye al lote ciego de un tercero (lote C), que es el unico con peso evidencial pleno.",
+		"orden_declarado": "Las senales del slice se implementaron en la Fase 2 (2026-10-06). Este lote se escribio en la Fase 5 (2026-10-08), es decir despues. El lote C corrige esto."
+	},
+	"criterio_de_etiqueta": {
+		"es_conducta_tipica": "Etiqueta de verdad: la fila representa una instancia real de la conducta tipica del delito. Es el denominador del recall.",
+		"cubierta_por_diseno": "Analisis, no etiqueta: existe alguna senal implementada que lea el rastro de esta conducta. Permite separar el recall total del recall sobre lo que el diseno afirma cubrir.",
+		"rol": "'conducta' entra en las metricas; 'control_negativo' entra como negativo; 'contexto' queda fuera de las metricas (filas que solo aportan historial)."
+	},
+	"filas": [
+		{
+			"id_compra": "LB-01",
+			"rol": "conducta",
+			"es_conducta_tipica": true,
+			"delito": "corrupcion_entre_particulares",
+			"conducta": "El solicitante favorece la contratacion con un oferente sobre otro adjudicando de forma directa, sin poner la contratacion en situacion de competencia.",
+			"elemento_tipico": "CP 287 bis — favorecer la contratacion con un oferente sobre otro",
+			"cubierta_por_diseno": true,
+			"senal_que_deberia_leerla": "adjudicacion_sin_competencia",
+			"nota": "Es el rastro directo del tipo penal. Con la ponderacion actual pesa 0.35 y por si solo NO alcanza el umbral de 0.5: la senal dispara pero no se levanta alerta. Hallazgo central de calibracion."
+		},
+		{
+			"id_compra": "LB-02",
+			"rol": "conducta",
+			"es_conducta_tipica": true,
+			"delito": "corrupcion_entre_particulares",
+			"conducta": "El solicitante recibe varias ofertas y descarta la mas barata sin justificacion, favoreciendo a un oferente determinado.",
+			"elemento_tipico": "CP 287 bis — favorecer la contratacion con un oferente sobre otro",
+			"cubierta_por_diseno": false,
+			"senal_que_deberia_leerla": "oferta_mas_barata_descartada (candidata en derivacion-delitos.md §1.2, NO implementada)",
+			"nota": "Omision por senal no implementada. La derivacion la identifico como candidata y la Fase 2 no la construyo: el dataset de demostracion no trae el precio de cada oferta."
+		},
+		{
+			"id_compra": "LB-03c",
+			"rol": "conducta",
+			"es_conducta_tipica": true,
+			"delito": "corrupcion_entre_particulares",
+			"conducta": "El solicitante concentra sostenidamente las compras de una categoria en un mismo proveedor, por sobre el umbral de aprobacion y con apariencia competitiva.",
+			"elemento_tipico": "CP 287 bis — favorecer la contratacion con un oferente sobre otro",
+			"cubierta_por_diseno": false,
+			"senal_que_deberia_leerla": "concentracion_en_un_proveedor (candidata en derivacion-delitos.md §1.2, NO implementada)",
+			"nota": "Omision por senal no implementada. El fraccionamiento no la cubre: estas compras estan SOBRE el umbral, no bajo el."
+		},
+		{
+			"id_compra": null,
+			"rol": "conducta",
+			"es_conducta_tipica": true,
+			"delito": "corrupcion_entre_particulares",
+			"conducta": "El proveedor entrega al solicitante el beneficio economico que motiva el favorecimiento.",
+			"elemento_tipico": "CP 287 bis — solicitar o aceptar un beneficio economico o de otra naturaleza",
+			"cubierta_por_diseno": false,
+			"senal_que_deberia_leerla": null,
+			"sin_fila": true,
+			"nota": "No tiene fila porque no tiene rastro: el pago ocurre fuera de los sistemas de la organizacion (derivacion-delitos.md §3). Es el elemento tipico central del delito y el sensor de datos es estructuralmente ciego a el. Se cuenta como omision para que el recall refleje la realidad y no solo lo que el CSV puede contener."
+		},
+		{
+			"id_compra": "LB-05",
+			"rol": "conducta",
+			"es_conducta_tipica": true,
+			"delito": "corrupcion_entre_particulares",
+			"conducta": "Se adjudica sin competencia a una sociedad constituida poco antes, creada por un tercero vinculado al solicitante.",
+			"elemento_tipico": "CP 287 bis — favorecer la contratacion con un oferente sobre otro",
+			"cubierta_por_diseno": true,
+			"senal_que_deberia_leerla": "adjudicacion_sin_competencia + proveedor_recientemente_constituido",
+			"nota": "Dos rastros concurrentes alcanzan el umbral. Deteccion esperada."
+		},
+		{
+			"id_compra": "LB-06",
+			"rol": "conducta",
+			"es_conducta_tipica": true,
+			"delito": "corrupcion_entre_particulares",
+			"conducta": "Se adjudica sin competencia a una sociedad de un familiar directo del solicitante, homonimo.",
+			"elemento_tipico": "CP 287 bis — favorecer la contratacion con un oferente sobre otro",
+			"cubierta_por_diseno": true,
+			"senal_que_deberia_leerla": "adjudicacion_sin_competencia + apellido_compartido_con_solicitante",
+			"nota": "Deteccion esperada. Depende de que el vinculo sea homonimo: ver LB-08."
+		},
+		{
+			"id_compra": "LB-07c",
+			"rol": "conducta",
+			"es_conducta_tipica": true,
+			"delito": "corrupcion_entre_particulares",
+			"conducta": "El solicitante fracciona la contratacion en compras bajo el umbral de aprobacion para sustraer la eleccion al escrutinio del aprobador.",
+			"elemento_tipico": "CP 287 bis — rastro habilitante del favorecimiento",
+			"cubierta_por_diseno": true,
+			"senal_que_deberia_leerla": "fraccionamiento",
+			"nota": "La senal dispara pero pesa 0.15 y no alcanza el umbral. Segundo hallazgo de calibracion: el rastro habilitante aislado no levanta alerta."
+		},
+		{
+			"id_compra": "LB-08",
+			"rol": "conducta",
+			"es_conducta_tipica": true,
+			"delito": "corrupcion_entre_particulares",
+			"conducta": "Se adjudica sin competencia a una sociedad de un cunado del solicitante, sin homonimia.",
+			"elemento_tipico": "CP 287 bis — favorecer la contratacion con un oferente sobre otro",
+			"cubierta_por_diseno": false,
+			"senal_que_deberia_leerla": "apellido_compartido_con_solicitante NO lo lee: el vinculo por afinidad no comparte apellido",
+			"nota": "Limite declarado de la heuristica de apellido. El vinculo es real y la senal es ciega a el. Solo dispara adjudicacion_sin_competencia (0.35), insuficiente."
+		},
+		{
+			"id_compra": "NC-01",
+			"rol": "control_negativo",
+			"es_conducta_tipica": false,
+			"tipo_de_control": "dispara legitimamente una senal",
+			"conducta": "Proveedor genuinamente nuevo que gana una licitacion con cuatro oferentes.",
+			"nota": "proveedor_recientemente_constituido dispara con razon y el sistema correctamente no levanta alerta. Un proveedor nuevo no es sospechoso por si solo."
+		},
+		{
+			"id_compra": "NC-02",
+			"rol": "control_negativo",
+			"es_conducta_tipica": false,
+			"tipo_de_control": "compra legitima",
+			"conducta": "Compra pequena, unica, competitiva, a un proveedor antiguo.",
+			"nota": "Ninguna senal dispara. Negativo limpio."
+		},
+		{
+			"id_compra": "NC-03c",
+			"rol": "control_negativo",
+			"es_conducta_tipica": false,
+			"tipo_de_control": "dispara legitimamente una senal",
+			"conducta": "Compras recurrentes de consumibles al mismo proveedor, bajo el umbral porque los consumibles son baratos, no para eludir nada.",
+			"nota": "fraccionamiento dispara sobre un patron legitimo. Correctamente no alcanza el umbral. Es la razon por la que fraccionamiento pesa poco."
+		},
+		{
+			"id_compra": "NC-04",
+			"rol": "control_negativo",
+			"es_conducta_tipica": false,
+			"tipo_de_control": "sospechoso en una dimension que ninguna senal lee",
+			"conducta": "Proveedor con flag PEP y tres causas judiciales, pero adjudicacion competitiva, sociedad antigua y sin vinculo con el solicitante.",
+			"nota": "Ninguna senal del slice lee flag_PEP ni causas_judiciales: estan en el CSV y ninguna senal implementada los consume. El sistema guarda silencio sobre una fila que un humano mirara dos veces. Hallazgo reportable sobre la cobertura del catalogo."
+		},
+		{
+			"id_compra": "NC-05",
+			"rol": "control_negativo",
+			"es_conducta_tipica": false,
+			"tipo_de_control": "falso positivo esperado",
+			"conducta": "Unico proveedor certificado en el pais para un servicio especializado, adjudicado sin competencia por esa razon, cuya razon social contiene por casualidad el apellido del solicitante (Reyes es uno de los apellidos mas frecuentes de Chile).",
+			"nota": "FALSO POSITIVO ESPERADO. Dos senales disparan por coincidencia y la suma cruza el umbral. Es el costo de la heuristica de apellido y se reporta como tal: el sistema prioriza la revision humana, y aqui le hace perder tiempo a una persona."
+		},
+		{
+			"id_compra": "LB-03a",
+			"rol": "contexto",
+			"nota": "Historial de la concentracion en LB-03c."
+		},
+		{
+			"id_compra": "LB-03b",
+			"rol": "contexto",
+			"nota": "Historial de la concentracion en LB-03c."
+		},
+		{
+			"id_compra": "LB-07a",
+			"rol": "contexto",
+			"nota": "Historial del fraccionamiento en LB-07c."
+		},
+		{
+			"id_compra": "LB-07b",
+			"rol": "contexto",
+			"nota": "Historial del fraccionamiento en LB-07c."
+		},
+		{
+			"id_compra": "NC-03a",
+			"rol": "contexto",
+			"nota": "Historial de las compras recurrentes en NC-03c."
+		},
+		{
+			"id_compra": "NC-03b",
+			"rol": "contexto",
+			"nota": "Historial de las compras recurrentes en NC-03c."
+		}
+	],
+	"limitacion_declarada": "Este lote mide si las senales detectan las conductas TAL COMO FUERON DERIVADAS de la ley. No mide si detectan fraude real. Las conductas con elemento tipico extra-organizacional (el beneficio) o subjetivo (el dolo) son estructuralmente indetectables por un sensor de datos, y se cuentan como omisiones a proposito para que el recall no sea enganosamente alto."
+}

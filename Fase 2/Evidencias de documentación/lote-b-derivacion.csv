@@ -1,0 +1,19 @@
+id_compra,fecha,monto,rut_proveedor,razon_social_proveedor,fecha_constitucion_proveedor,flag_pep,causas_judiciales,n_oferentes,rut_solicitante,nombres_solicitante,apellido_paterno_solicitante,apellido_materno_solicitante,rut_aprobador,nombres_aprobador,apellido_paterno_aprobador,apellido_materno_aprobador
+NC-03a,2026-10-01,4500000,76.667.445-9,Insumos Limpieza Biobío Ltda,2010-06-04,0,0,3,17.223.556-4,Valentina Ignacia,Reyes,Fuentes,11.445.778-3,Patricio Hernán,Valenzuela,Díaz
+LB-07a,2026-10-02,4600000,76.998.334-7,Suministros Aconcagua Ltda,2010-11-15,0,0,3,14.778.332-K,Rodrigo Esteban,Pinto,Carrasco,11.445.778-3,Patricio Hernán,Valenzuela,Díaz
+LB-01,2026-10-05,22000000,76.701.223-4,Constructora Lihuén Ltda,2014-05-20,0,0,1,16.445.223-9,Camila Andrea,Tapia,Bustos,11.445.778-3,Patricio Hernán,Valenzuela,Díaz
+LB-02,2026-10-06,14200000,76.812.667-1,Proyectos Maule SpA,2013-02-11,0,0,4,14.778.332-K,Rodrigo Esteban,Pinto,Carrasco,12.667.889-5,Soledad Beatriz,Cáceres,Miranda
+NC-01,2026-10-07,9400000,76.445.778-3,Tecnología Austral Nueva SpA,2026-09-20,0,0,4,13.887.445-2,Jorge Antonio,Salazar,Núñez,11.445.778-3,Patricio Hernán,Valenzuela,Díaz
+NC-02,2026-10-08,1250000,76.112.990-4,Librería Central Ltda,2009-03-17,0,0,3,16.445.223-9,Camila Andrea,Tapia,Bustos,12.667.889-5,Soledad Beatriz,Cáceres,Miranda
+LB-03a,2026-09-15,8400000,77.119.445-6,Servicios Globales Elqui Ltda,2011-07-03,0,0,3,15.332.887-1,María Paz,Herrera,Vidal,11.445.778-3,Patricio Hernán,Valenzuela,Díaz
+LB-03b,2026-09-28,9100000,77.119.445-6,Servicios Globales Elqui Ltda,2011-07-03,0,0,3,15.332.887-1,María Paz,Herrera,Vidal,11.445.778-3,Patricio Hernán,Valenzuela,Díaz
+LB-03c,2026-10-09,7800000,77.119.445-6,Servicios Globales Elqui Ltda,2011-07-03,0,0,3,15.332.887-1,María Paz,Herrera,Vidal,11.445.778-3,Patricio Hernán,Valenzuela,Díaz
+NC-03b,2026-10-10,4400000,76.667.445-9,Insumos Limpieza Biobío Ltda,2010-06-04,0,0,3,17.223.556-4,Valentina Ignacia,Reyes,Fuentes,11.445.778-3,Patricio Hernán,Valenzuela,Díaz
+NC-04,2026-10-11,13700000,77.880.221-3,Asesorías Andinas Ltda,2012-08-30,1,3,4,14.778.332-K,Rodrigo Esteban,Pinto,Carrasco,12.667.889-5,Soledad Beatriz,Cáceres,Miranda
+LB-05,2026-10-12,18600000,77.556.110-8,Inversiones Pehuén SpA,2026-09-14,0,0,1,13.887.445-2,Jorge Antonio,Salazar,Núñez,11.445.778-3,Patricio Hernán,Valenzuela,Díaz
+LB-07b,2026-10-13,4800000,76.998.334-7,Suministros Aconcagua Ltda,2010-11-15,0,0,3,14.778.332-K,Rodrigo Esteban,Pinto,Carrasco,11.445.778-3,Patricio Hernán,Valenzuela,Díaz
+LB-06,2026-10-14,11300000,76.334.889-2,Comercial Tapia y Asociados Ltda,2017-09-08,0,0,1,16.445.223-9,Camila Andrea,Tapia,Bustos,11.445.778-3,Patricio Hernán,Valenzuela,Díaz
+LB-08,2026-10-16,16400000,77.223.908-5,Ingeniería Quelén SpA,2016-04-22,0,0,1,15.332.887-1,María Paz,Herrera,Vidal,12.667.889-5,Soledad Beatriz,Cáceres,Miranda
+NC-05,2026-10-18,19200000,76.009.887-1,Servicios Técnicos Reyes Ltda,2008-01-29,0,0,1,17.223.556-4,Valentina Ignacia,Reyes,Fuentes,11.445.778-3,Patricio Hernán,Valenzuela,Díaz
+NC-03c,2026-10-20,4600000,76.667.445-9,Insumos Limpieza Biobío Ltda,2010-06-04,0,0,3,17.223.556-4,Valentina Ignacia,Reyes,Fuentes,11.445.778-3,Patricio Hernán,Valenzuela,Díaz
+LB-07c,2026-10-22,4700000,76.998.334-7,Suministros Aconcagua Ltda,2010-11-15,0,0,3,14.778.332-K,Rodrigo Esteban,Pinto,Carrasco,11.445.778-3,Patricio Hernán,Valenzuela,Díaz
